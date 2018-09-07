@@ -1,11 +1,14 @@
-// Fixed Ratio (FR) program
-// Created: 8/20/2018
-// Modified: 9/7/2018
-// Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
+/* Variable Ratio (VR) program
+ * Same as Fixed Ratio, but altered to have a variable number of button clicks
+ * Created: 9/7/2018
+ * Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
+*/
 
 int delay_value = 200; // how fast the audible click is (higher=longer)
-int fr = 5; // amount of button presses to start the relay
 int switchcounter2 = 0; // counter for small button presses
+int ratio_upper = 10; // highest variable ratio that can be selected
+int ratio_lower = 2; // lowest variable ratio that can be selected
+
 void setup() {
   pinMode(2, INPUT); // right switch (spst momentary n.o.)
   pinMode(3, OUTPUT);  // LED red middle
@@ -38,6 +41,8 @@ void loop() {
   int lastswitchstate2 = 0, lastswitchstate7 = 0;
   digitalWrite(3, LOW);
   digitalWrite(6, LOW);
+
+  int fr = 5; // use ratio limits to get random value
   
   if (digitalRead(4) == HIGH) { //Bottom BLACK Button
     digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
