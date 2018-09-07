@@ -4,7 +4,7 @@
  * Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
 */
 
-int delay_value = 200; // how fast the audible click is (higher=longer)
+int delay_value = 500; // how fast the audible click is (higher=longer)
 int switchcounter2 = 0; // counter for small button presses
 int ratio_upper = 10; // highest variable ratio that can be selected
 int ratio_lower = 2; // lowest variable ratio that can be selected
@@ -17,7 +17,7 @@ void setup() {
   pinMode(6, OUTPUT);  // LED right green
   pinMode(7, INPUT);  // left switch (spst momentary n.o.)
   pinMode(8, INPUT);  // left switch, bottom green (spst)
-  //pinMode(10, OUTPUT);  // relay
+  pinMode(10, OUTPUT);  // relay
 }
 
 void triggerRelay() {
