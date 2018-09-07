@@ -9,7 +9,7 @@ this just runs while button is active
 2- fixed ratio - COMPLETED
 
 
-3- variable ratio
+3- variable ratio - COMPLETED
 random number of button presses within constraint x-y
 
 
