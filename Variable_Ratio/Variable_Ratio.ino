@@ -1,12 +1,13 @@
-/* Fixed Ratio (FR) program
- * Created: 8/20/2018
- * Modified: 9/7/2018
+/* Variable Ratio (VR) program
+ * Same as Fixed Ratio, but altered to have a variable number of button clicks
+ * Created: 9/7/2018
  * Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
 */
 
 int delay_value = 500; // how fast the audible click is (higher=longer)
-int fr = 5; // amount of button presses to start the relay
 int switchcounter2 = 0; // counter for small button presses
+int ratio_upper = 10; // highest variable ratio that can be selected
+int ratio_lower = 2; // lowest variable ratio that can be selected
 
 void setup() {
   pinMode(2, INPUT); // right switch (spst momentary n.o.)
@@ -40,6 +41,8 @@ void loop() {
   int lastswitchstate2 = 0, lastswitchstate7 = 0;
   digitalWrite(3, LOW);
   digitalWrite(6, LOW);
+
+  int vr = random(ratio_lower, ratio_upper); // use ratio limits to get random value
   
   if (digitalRead(4) == HIGH) { //Bottom BLACK Button
     digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
@@ -50,7 +53,7 @@ void loop() {
       if ((switchState2 != lastswitchstate2 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
       delay(50); //Delay for 50ms
       lastswitchstate2 = switchState2; //store last state (for reset)
-    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+    } while (switchcounter2 < vr); //Run this do, while the counter is LESS THAN the variable ratio
 
     triggerRelay();
     return;
@@ -65,7 +68,7 @@ void loop() {
       if ((switchState7 != lastswitchstate7 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
       delay(50); //Delay for 50ms
       lastswitchstate7 = switchState7; //store last state (for reset)
-    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+    } while (switchcounter2 < vr); //Run this do, while the counter is LESS THAN the variable ratio
 
     triggerRelay();
     return;
