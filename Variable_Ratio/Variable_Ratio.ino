@@ -42,7 +42,7 @@ void loop() {
   digitalWrite(3, LOW);
   digitalWrite(6, LOW);
 
-  int fr = 5; // use ratio limits to get random value
+  int vr = 5; // use ratio limits to get random value
   
   if (digitalRead(4) == HIGH) { //Bottom BLACK Button
     digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
@@ -53,7 +53,7 @@ void loop() {
       if ((switchState2 != lastswitchstate2 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
       delay(50); //Delay for 50ms
       lastswitchstate2 = switchState2; //store last state (for reset)
-    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+    } while (switchcounter2 < vr); //Run this do, while the counter is LESS THAN the variable ratio
 
     triggerRelay();
     return;
@@ -68,7 +68,7 @@ void loop() {
       if ((switchState7 != lastswitchstate7 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
       delay(50); //Delay for 50ms
       lastswitchstate7 = switchState7; //store last state (for reset)
-    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+    } while (switchcounter2 < vr); //Run this do, while the counter is LESS THAN the variable ratio
 
     triggerRelay();
     return;
