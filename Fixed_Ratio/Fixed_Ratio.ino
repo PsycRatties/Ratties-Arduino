@@ -1,86 +1,71 @@
-//Fixed Ratio (FR) program
-//8/20/2018
-//Albena Ammann, Ed Berg, Mark Berg
+// Fixed Ratio (FR) program
+// Created: 8/20/2018
+// Modified: 9/7/2018
+// Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
 
-int switchState = 0; 
-int delay_value = 500; // how fast the audible click is (higher=longer)
+int delay_value = 200; // how fast the audible click is (higher=longer)
 int fr = 5; // amount of button presses to start the relay
+int switchcounter2 = 0; // counter for small button presses
 void setup() {
-
-  pinMode(7, INPUT);  // left switch (spst momentary n.o.)
+  pinMode(2, INPUT); // right switch (spst momentary n.o.)
+  pinMode(3, OUTPUT);  // LED red middle
   pinMode(4, INPUT);  // right switch, bottom black (spst)
   pinMode(5, OUTPUT);  // LED left blue
-  pinMode(2, INPUT); // right switch (spst momentary n.o.)
   pinMode(6, OUTPUT);  // LED right green
-  pinMode(10, OUTPUT);  // relay
-  pinMode(3, OUTPUT);  // LED red middle
+  pinMode(7, INPUT);  // left switch (spst momentary n.o.)
   pinMode(8, INPUT);  // left switch, bottom green (spst)
+  //pinMode(10, OUTPUT);  // relay
+}
+
+void triggerRelay() {
+  for(int i = 0; i < 10; i++) {  //repeat the next if/else 10 times
+    digitalWrite(5, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(5, HIGH);
+    digitalWrite(10, HIGH);
+    delay(delay_value);
+    digitalWrite(10, LOW);
+    delay(delay_value);
+    digitalWrite(10, HIGH);
+    digitalWrite(10, LOW);
+    digitalWrite(5, LOW);
+    switchcounter2 = 0;
+  }
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  int switchcounter2 = 0;
-  int switchState2;
-  int switchState7;
-  int lastswitchstate2 = 0;
-  int lastswitchstate7 = 0;
-
-  if (digitalRead (4) == HIGH) {
-    digitalWrite(6, digitalRead(4));
+  int switchState2, switchState7;
+  int lastswitchstate2 = 0, lastswitchstate7 = 0;
+  digitalWrite(3, LOW);
+  digitalWrite(6, LOW);
+  
+  if (digitalRead(4) == HIGH) { //Bottom BLACK Button
+    digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
     
     do { 
-      switchState2 = digitalRead(2);
-      switchState7 = digitalRead(7);   
-      
-      if ((switchState2 != lastswitchstate2 ) and (switchState2 == HIGH))
-        switchcounter2++;
-     
-      delay(50);
-      
-      lastswitchstate2 = switchState2;
-    } while (switchcounter2 < fr);
-  
-    for(int i = 0; i < 10; i++) {  //repeat the next if/else 10 times
-        digitalWrite(5, LOW);
-        digitalWrite(10, LOW);
-        digitalWrite(5, HIGH);
-        digitalWrite(10, HIGH);
-        delay(delay_value);
-        digitalWrite(10, LOW);
-        delay(delay_value);
-        digitalWrite(10, HIGH);
-        digitalWrite(10, LOW);
-        digitalWrite(5, LOW);
-        switchcounter2 = 0;
-    }
+      switchState2 = digitalRead(2); //Read the state of the button
+      switchState7 = digitalRead(7); //Read the state of the button
+      if ((switchState2 != lastswitchstate2 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
+      delay(50); //Delay for 50ms
+      lastswitchstate2 = switchState2; //store last state (for reset)
+    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+
+    triggerRelay();
+    return;
   } else digitalWrite(6, LOW);
 
-  if (digitalRead (8) == HIGH) {
-    digitalWrite(3, digitalRead(8));
+  if (digitalRead(8) == HIGH) { //Bottom GREEN Button
+    digitalWrite(3, digitalRead(8)); //Turn on the RED light
     
-    do {
-        switchState7 = digitalRead(7);   
-       
-        if ((switchState2 != lastswitchstate2 ) and ((switchState2 == HIGH) or (switchState7 == HIGH)))
-          switchcounter2++;
-       
-        delay(50);
-        
-        lastswitchstate7 = switchState7;  
-    } while (switchcounter2 < fr);
-  
-    for (int j = 0; j < 10; j++) {  //repeat the next if/else 10 times
-      digitalWrite(5, LOW);
-      digitalWrite(10, LOW);
-      digitalWrite(5, HIGH);
-      digitalWrite(10, HIGH);
-      delay(delay_value);
-      digitalWrite(10, LOW);
-      delay(delay_value);
-      digitalWrite(10, HIGH);
-      digitalWrite(10, LOW);
-      digitalWrite(5, LOW);
-      switchcounter2 = 0;
-    }
-  } else digitalWrite(3, LOW); 
+    do { 
+      switchState2 = digitalRead(7); //Read the state of the button
+      switchState7 = digitalRead(7); //Read the state of the button
+      if ((switchState7 != lastswitchstate7 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
+      delay(50); //Delay for 50ms
+      lastswitchstate7 = switchState7; //store last state (for reset)
+    } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
+
+    triggerRelay();
+    return;
+  } else digitalWrite(3, LOW);
 }
