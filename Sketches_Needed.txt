@@ -6,7 +6,7 @@ var: how long repitions, how many times it cliks (random between limits), limits
 this just runs while button is active
 
 
-2- fixed ratio (already coded)
+2- fixed ratio - COMPLETED
 
 
 3- variable ratio
