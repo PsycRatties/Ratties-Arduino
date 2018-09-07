@@ -1,0 +1,22 @@
+6 sketches
+
+1- dip training
+if green button on, turn on the blue led and relay for x seconds then off for x seconds
+var: how long repitions, how many times it cliks (random between limits), limits of randomness x-y, delay of clicking, how much time between each event
+this just runs while button is active
+
+
+2- fixed training (already coded)
+
+
+3- fixed interval
+press green button, starts program
+allow any top button press - if done after any set amount of time, the feeder triggers
+
+
+4- variable ratio
+random number of button presses within constraint x-y
+
+
+5- variable interval
+same as fixed, but random amount of time within constraints
