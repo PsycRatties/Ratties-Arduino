@@ -6,16 +6,16 @@ var: how long repitions, how many times it cliks (random between limits), limits
 this just runs while button is active
 
 
-2- fixed training (already coded)
+2- fixed ratio (already coded)
 
 
-3- fixed interval
+3- variable ratio
+random number of button presses within constraint x-y
+
+
+4- fixed interval
 press green button, starts program
 allow any top button press - if done after any set amount of time, the feeder triggers
-
-
-4- variable ratio
-random number of button presses within constraint x-y
 
 
 5- variable interval
