@@ -42,7 +42,7 @@ void loop() {
   digitalWrite(3, LOW);
   digitalWrite(6, LOW);
 
-  int vr = 5; // use ratio limits to get random value
+  int vr = random(ratio_lower, ratio_upper); // use ratio limits to get random value
   
   if (digitalRead(4) == HIGH) { //Bottom BLACK Button
     digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
