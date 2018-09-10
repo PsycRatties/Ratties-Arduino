@@ -1,6 +1,5 @@
-/* Fixed Ratio (FR) program
- * Created: 8/20/2018
- * Modified: 9/7/2018
+/* Fixed Interval (FI) program
+ * Created: 9/10/2018
  * Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
 */
 
