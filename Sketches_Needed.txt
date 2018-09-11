@@ -18,5 +18,5 @@ press green button, starts program
 allow any top button press - if done after any set amount of time, the feeder triggers
 
 
-5- variable interval
+5- variable interval - COMPLETED
 same as fixed, but random amount of time within constraints
