@@ -13,7 +13,7 @@ this just runs while button is active
 random number of button presses within constraint x-y
 
 
-4- fixed interval
+4- fixed interval - COMPLETED
 press green button, starts program
 allow any top button press - if done after any set amount of time, the feeder triggers
 
