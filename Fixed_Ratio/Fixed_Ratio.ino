@@ -1,7 +1,7 @@
 /* Fixed Ratio (FR) program
- * Created: 8/20/2018
- * Modified: 9/7/2018
- * Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
+   Created: 8/20/2018
+   Modified: 9/7/2018
+   Authors: Albena Ammann, Ed Berg, Mark Berg, Daniel W. Anner
 */
 
 int delay_value = 500; // how fast the audible click is (higher=longer)
@@ -20,7 +20,10 @@ void setup() {
 }
 
 void triggerRelay() {
-  for(int i = 0; i < 10; i++) {  //repeat the next if/else 10 times
+  digitalWrite(6, LOW); //Turn off the GREEN light
+  digitalWrite(3, LOW); //Turn off the RED light
+
+  for (int i = 0; i < 10; i++) { //repeat the next if/else 10 times
     digitalWrite(5, LOW);
     digitalWrite(10, LOW);
     digitalWrite(5, HIGH);
@@ -40,14 +43,16 @@ void loop() {
   int lastswitchstate2 = 0, lastswitchstate7 = 0;
   digitalWrite(3, LOW);
   digitalWrite(6, LOW);
-  
+
   if (digitalRead(4) == HIGH) { //Bottom BLACK Button
     digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
-    
-    do { 
+
+    do {
       switchState2 = digitalRead(2); //Read the state of the button
       switchState7 = digitalRead(7); //Read the state of the button
-      if ((switchState2 != lastswitchstate2 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
+      if ((switchState2 != lastswitchstate2 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) {
+        switchcounter2++;  //Increment the counter
+      }
       delay(50); //Delay for 50ms
       lastswitchstate2 = switchState2; //store last state (for reset)
     } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
@@ -58,11 +63,13 @@ void loop() {
 
   if (digitalRead(8) == HIGH) { //Bottom GREEN Button
     digitalWrite(3, digitalRead(8)); //Turn on the RED light
-    
-    do { 
+
+    do {
       switchState2 = digitalRead(7); //Read the state of the button
       switchState7 = digitalRead(7); //Read the state of the button
-      if ((switchState7 != lastswitchstate7 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) { switchcounter2++; } //Increment the counter
+      if ((switchState7 != lastswitchstate7 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) {
+        switchcounter2++;  //Increment the counter
+      }
       delay(50); //Delay for 50ms
       lastswitchstate7 = switchState7; //store last state (for reset)
     } while (switchcounter2 < fr); //Run this do, while the counter is LESS THAN the fixed ratio
