@@ -20,6 +20,9 @@ void setup() {
 }
 
 void triggerRelay() {
+  digitalWrite(6, LOW); //Turn off the GREEN light
+  digitalWrite(3, LOW); //Turn off the RED light
+
   for (int i = 0; i < 10; i++) { //repeat the next if/else 10 times
     digitalWrite(5, LOW);
     digitalWrite(10, LOW);
@@ -75,4 +78,3 @@ void loop() {
     return;
   } else digitalWrite(3, LOW);
 }
-
