@@ -41,16 +41,14 @@ void triggerRelay() {
 void loop() {
   int switchState2, switchState7;
   int lastswitchstate2 = 0, lastswitchstate7 = 0;
-  digitalWrite(3, LOW);
-  digitalWrite(6, LOW);
+  digitalWrite(3, LOW); digitalWrite(6, LOW);
 
   if (digitalRead(4) == HIGH) { //Bottom BLACK Button
     digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
 
     do {
       switchState2 = digitalRead(2); //Read the state of the button
-      switchState7 = digitalRead(7); //Read the state of the button
-      if ((switchState2 != lastswitchstate2 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) {
+      if ((switchState2 != lastswitchstate2) and (switchState2 == HIGH)) {
         switchcounter2++;  //Increment the counter
       }
       delay(50); //Delay for 50ms
@@ -59,15 +57,12 @@ void loop() {
 
     triggerRelay();
     return;
-  } else digitalWrite(6, LOW);
-
-  if (digitalRead(8) == HIGH) { //Bottom GREEN Button
+  } else if (digitalRead(8) == HIGH) { //Bottom GREEN Button
     digitalWrite(3, digitalRead(8)); //Turn on the RED light
 
     do {
-      switchState2 = digitalRead(7); //Read the state of the button
       switchState7 = digitalRead(7); //Read the state of the button
-      if ((switchState7 != lastswitchstate7 ) and ((switchState2 == HIGH) or (switchState7 == HIGH))) {
+      if ((switchState7 != lastswitchstate7) and (switchState7 == HIGH)) {
         switchcounter2++;  //Increment the counter
       }
       delay(50); //Delay for 50ms
@@ -76,5 +71,5 @@ void loop() {
 
     triggerRelay();
     return;
-  } else digitalWrite(3, LOW);
+  } else { digitalWrite(3, LOW); digitalWrite(6, LOW); }
 }
