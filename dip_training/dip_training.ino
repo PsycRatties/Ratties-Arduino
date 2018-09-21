@@ -4,9 +4,9 @@
 */
 
 int delay_value = 500; // how fast the audible click is (higher=longer)
-int interval_upper = 2; // highest time interval that can be selected
-int interval_lower = 2; // lowest time interval that can be selected
-int timesToClick = 3; // amount of times the relay should be triggered (default: 10)
+int interval_upper = 45; // highest time interval that can be selected
+int interval_lower = 10; // lowest time interval that can be selected
+int timesToClick = 5; // amount of times the relay should be triggered (default: 10)
 
 void setup() {
   pinMode(2, INPUT); // right switch (spst momentary n.o.)
