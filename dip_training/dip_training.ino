@@ -4,7 +4,7 @@
 */
 
 int delay_value = 500; // how fast the audible click is (higher=longer)
-int interval_upper = 45; // highest time interval that can be selected
+int interval_upper = 30; // highest time interval that can be selected
 int interval_lower = 10; // lowest time interval that can be selected
 int timesToClick = 5; // amount of times the relay should be triggered (default: 10)
 
@@ -42,7 +42,8 @@ void loop() {
   digitalWrite(3, LOW); digitalWrite(6, LOW); // turn off both LED's on start of script
 
   do {
-    if (digitalRead(8) == HIGH) { triggerRelay(); } else return; // ensure the green button is pressed, then trigger relay
     delay(delay_seconds); // delay given time
+    if (digitalRead(8) == HIGH) { triggerRelay(); } else return; // ensure the green button is pressed, then trigger relay
+    delay_seconds = (random(interval_lower, interval_upper) * 1000); // use ratio limits to get random value
   } while (digitalRead(8) == HIGH); // do this while the green button is pressed
 }
