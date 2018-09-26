@@ -42,16 +42,21 @@ void loop() {
   int delay_seconds = (random(interval_lower, interval_upper) * 1000); // use ratio limits to get random value
   digitalWrite(3, LOW); digitalWrite(6, LOW); // turn off both LED's on start of script
 
-  if ((digitalRead(4) == HIGH) or (digitalRead(8) == HIGH)) { // if either bottom button pressed, start the program
-    digitalWrite(6, digitalRead(4)); //Turn on the GREEN light if GREEN button enabled
+  if (digitalRead(4) == HIGH) { //Bottom BLACK Button
     digitalWrite(3, digitalRead(8)); //Turn on the RED light if BLACK button enabled
 
-    delay(delay_seconds); 
+    delay(delay_seconds);
 
     do {
-      if ((digitalRead(2) == HIGH) or (digitalRead(7) == HIGH)) { hasRun = true; triggerRelay(); }
+      if (digitalRead(2) == HIGH) { hasRun = true; triggerRelay(); }
     } while (!hasRun);
-  } else {
-    digitalWrite(6, LOW); digitalWrite(3, LOW);
-  }
+  } else if (digitalRead(8) == HIGH) { //Bottom GREEN Button
+    digitalWrite(6, digitalRead(4)); //Turn on the GREEN light if GREEN button enabled
+
+    delay(delay_seconds);
+
+    do {
+      if (digitalRead(2) == HIGH) { hasRun = true; triggerRelay(); }
+    } while (!hasRun);
+  } else { digitalWrite(3, LOW); digitalWrite(6, LOW); }
 }
