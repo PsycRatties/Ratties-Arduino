@@ -43,7 +43,7 @@ void loop() {
   digitalWrite(3, LOW); digitalWrite(6, LOW); // turn off both LED's on start of script
 
   if (digitalRead(4) == HIGH) { //Bottom BLACK Button
-    digitalWrite(3, digitalRead(8)); //Turn on the RED light if BLACK button enabled
+    digitalWrite(6, digitalRead(4)); //Turn on the GREEN light
 
     delay(delay_seconds);
 
@@ -51,7 +51,7 @@ void loop() {
       if (digitalRead(2) == HIGH) { hasRun = true; triggerRelay(); }
     } while (!hasRun);
   } else if (digitalRead(8) == HIGH) { //Bottom GREEN Button
-    digitalWrite(6, digitalRead(4)); //Turn on the GREEN light if GREEN button enabled
+    digitalWrite(3, digitalRead(8)); //Turn on the RED light
 
     delay(delay_seconds);
 
