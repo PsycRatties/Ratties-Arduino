@@ -56,7 +56,7 @@ void loop() {
     delay(delay_seconds);
 
     do {
-      if (digitalRead(2) == HIGH) { hasRun = true; triggerRelay(); }
+      if (digitalRead(7) == HIGH) { hasRun = true; triggerRelay(); }
     } while (!hasRun);
   } else { digitalWrite(3, LOW); digitalWrite(6, LOW); }
 }
